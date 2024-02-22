@@ -1,0 +1,54 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb 22 14:33:53 2024
+
+@author: Owen
+"""
+def getMenuChoice ():
+    print("""
+        0.	Exit
+        1.	Load default Game
+        2.	Load game file
+        3.	Save Current game
+        4.	Edit or add node
+        5.	Play current game
+
+        """)
+    response=input("Please choose a number from the menu: ")
+    return response
+
+def main():
+    #game=getDefaultGame()
+    keepGoing = True
+    while keepGoing:
+        response=getMenuChoice()
+        if response=="0":
+            keepGoing=False
+        elif response=="1":
+            print("Loading Default Game")
+            #getDefaultGame()
+        elif response=="2":
+            print("Loading Saved Game")
+            
+        elif response=="3":
+            print("Saved Current Game")
+            
+        elif response=="4":
+            print("edit or add nodes")
+            
+        elif response=="5":
+            print("Playing current game")
+            #playGame()
+        else:
+            print("Please select a valid input (1-5)")
+        
+def playGame(game):
+    game=getDefaultGame()
+    while currentNode != "quit":
+        currentNode=playNode(currentNode, game)
+        
+def getDefaultGame():
+    default={
+        "Default start node": ["start over", "start", "quit", "quit"]
+        }
+    return default
