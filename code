@@ -4,6 +4,7 @@ Created on Thu Feb 22 14:33:53 2024
 
 @author: Owen
 """
+import json
 def getMenuChoice ():
     print("""
         0.	Exit
@@ -18,7 +19,7 @@ def getMenuChoice ():
     return response
 
 def main():
-    #game=getDefaultGame()
+    game=getDefaultGame()
     keepGoing = True
     while keepGoing:
         response=getMenuChoice()
@@ -26,7 +27,7 @@ def main():
             keepGoing=False
         elif response=="1":
             print("Loading Default Game")
-            #getDefaultGame()
+            
         elif response=="2":
             print("Loading Saved Game")
             
@@ -35,15 +36,16 @@ def main():
             
         elif response=="4":
             print("edit or add nodes")
-            
+            editNode()
         elif response=="5":
             print("Playing current game")
-            #playGame()
+            playGame()
         else:
             print("Please select a valid input (1-5)")
         
 def playGame(game):
     game=getDefaultGame()
+    currentNode="start"
     while currentNode != "quit":
         currentNode=playNode(currentNode, game)
         
@@ -52,3 +54,57 @@ def getDefaultGame():
         "Default start node": ["start over", "start", "quit", "quit"]
         }
     return default
+
+def playNode(game, currentNode):
+    (description, menuA, nodeA, menuB, nodeB) = game[currentNode]
+    print(f"""
+          {description}
+          1. {menuA}
+          2. {menuB}
+          """)
+    response= input("What will you do? 1 or 2")
+    if response == ("1"):
+        newNode=nodeA
+    elif response == ("2"):
+        newNode=nodeB
+    else:
+        print("Please pick 1 or 2")
+        newNode=currentNode
+    return newNode
+
+def loadGame():
+    inFile = open("game.json", "r")
+    game = json.load(inFile)
+    inFile.close()
+    return game
+
+def saveGame(game):
+    outFile = open("game.json", "w")
+    json.dump(game,outFile,indent=2)
+    print("Game saved")
+    outFile.close()
+    
+def editNode(game):
+    print("Current status of game: ")
+    print(json.dumps(game, indent=2))
+    print("Existing node names: ")
+    for nodeName in game.keys():
+        print(f" {nodeName}")
+    newNodeName = input("name of node to edit or create?")
+    if newNodeName in game.keys():
+        newContent = game[newNodeName]
+    else:
+        newContent = ("","","","","")
+    
+    (description, menuA, nodeA, menuB, nodeB) = newContent
+    newDescription = editField("description", description)
+    newMenuA = editField ("menu A", menuA)
+    nodeA = editField ("node A", nodeA)
+    menuB = editField("menu B", menuB)
+    nodeB = editField("node B", nodeB)
+def editField(prompt, currentVal):
+    
+    
+    
+    
+    
