@@ -1,0 +1,30 @@
+{
+  "start": [
+    "Are you a winner?",
+    "Yes",
+    "You win",
+    "No",
+    "You lose"
+  ],
+  " start": [
+    "Hello",
+    "Are you a winner?",
+    "",
+    "",
+    ""
+  ],
+  "You win": [
+    "You are a winner!",
+    "start over",
+    "start",
+    "quit",
+    "quit"
+  ],
+  "You lose": [
+    "You are a loser!",
+    "start over",
+    "start",
+    "quit",
+    "quit"
+  ]
+}
