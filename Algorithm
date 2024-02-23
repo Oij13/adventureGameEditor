@@ -1,0 +1,207 @@
+getMenuChoice() 
+
+Print Menu- 
+
+Exit 
+
+Load default Game 
+
+Load game file 
+
+Save Current game 
+
+Edit or add node 
+
+Play current game 
+
+Get user input 
+
+Make sure input is 0-5 
+
+Return user input 
+
+Main() 
+
+Use getDefaultGame function to set game to default nodes 
+
+keepGoing=TRUE 
+
+While keepGoing: 
+
+Call menu 
+
+If user input 0: 
+
+Quit loop and stop game 
+
+keepGoing=FALSE 
+
+else if user input 1: 
+
+tell user “load default game” 
+
+call getDefaultGame function  
+
+else if 2: 
+
+load the saved game file 
+
+tell user “load saved game file” 
+
+else if 3: 
+
+save the current game into JSON  
+
+tell user “saved current game” 
+
+else if 4: 
+
+call function that edits or adds nodes 
+
+tell user “edit or add node” 
+
+else if 5: 
+
+play the current game  
+
+else: 
+
+Reject input and ask for a valid input 0-5 
+
+ 
+
+getDefaultGame() 
+
+create data structure with default game-default 
+
+“default start mode” 
+
+Start over 
+
+start 
+
+Quit 
+
+Quit 
+
+Return default 
+
+ 
+
+ 
+
+PlayGame(game) 
+
+Create variable for current game 
+
+While the current node is not quit: 
+
+Currentnode = playNode(currentNode, currentgame) 
+
+ 
+
+PlayNode(game, currentNode) 
+
+If the current node is viable: (bell and whistle) 
+
+Give the current node (description, menuA, nodeA, menuB, nodeB)	 
+
+Print the menu:	 
+
+(f""" 
+
+          {description} 
+
+          1. {menuA} 
+
+          2. {menuB} 
+
+“””) 
+
+response = input (“What will you do? (1 or 2) “) 
+
+if response == “1”: 
+
+newNode = nodeA 
+
+elif response == “2”: 
+
+newNode = nodeB 
+
+else: 
+
+print (“Please pick 1 or 2”) 
+
+newNode = node 
+
+ 
+
+Return newNode 
+
+ 
+
+SaveGame() 
+
+Import json outside of function 
+
+ 
+
+OutFile = open(“game.json”, “w”) 
+
+Json.dump(game, outFile, indent = 2) 
+
+Tell user that game was saved 
+
+Close file	outFile.close() 
+
+ 
+
+LoadGame() 
+
+InFile = open(“game.json”, “r”) 
+
+Game = json.load(inFile) 
+
+FileIn.close() 
+
+Return game 
+
+ 
+
+ 
+
+ 
+
+EditNode() 
+
+	List all the current node content 
+
+	Json.dumps(game, indent=2) 
+
+	Ask for new node 
+
+	If that node is viable, 
+
+		put that node in newNode 
+
+	Else: 
+
+		newNode gets no data 
+
+ 
+
+	Allow user to edit nodes 
+
+	Return newNode 
+
+ 
+
+EditField() 
+
+	NewVal = input from user (“{prompt}, {currentVal} 
+
+	If the new value is nothing, 
+
+		give the new value the current value 
+
+	Return newVal 
