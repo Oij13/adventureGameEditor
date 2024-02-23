@@ -27,42 +27,43 @@ def main():
             keepGoing=False
         elif response=="1":
             print("Loading Default Game")
-            
+            game=getDefaultGame()
         elif response=="2":
             print("Loading Saved Game")
-            
+            game = loadGame()
         elif response=="3":
             print("Saved Current Game")
-            
+            saveGame(game)
         elif response=="4":
             print("edit or add nodes")
-            editNode()
+            game = editNode(game)
         elif response=="5":
             print("Playing current game")
-            playGame()
+            playGame(game)
         else:
             print("Please select a valid input (1-5)")
         
 def playGame(game):
-    game=getDefaultGame()
+    
     currentNode="start"
     while currentNode != "quit":
-        currentNode=playNode(currentNode, game)
+        currentNode=playNode(game, currentNode)
         
 def getDefaultGame():
     default={
-        "Default start node": ["start over", "start", "quit", "quit"]
+        "start": ["Default start node","start over", "start", "quit", "quit"]
         }
     return default
 
 def playNode(game, currentNode):
-    (description, menuA, nodeA, menuB, nodeB) = game[currentNode]
+    if currentNode in game.keys():
+        (description, menuA, nodeA, menuB, nodeB) = game[currentNode]
     print(f"""
           {description}
           1. {menuA}
           2. {menuB}
           """)
-    response= input("What will you do? 1 or 2")
+    response= input("What will you do? 1 or 2: ")
     if response == ("1"):
         newNode=nodeA
     elif response == ("2"):
@@ -99,12 +100,19 @@ def editNode(game):
     (description, menuA, nodeA, menuB, nodeB) = newContent
     newDescription = editField("description", description)
     newMenuA = editField ("menu A", menuA)
-    nodeA = editField ("node A", nodeA)
-    menuB = editField("menu B", menuB)
-    nodeB = editField("node B", nodeB)
+    newNodeA = editField ("node A", nodeA)
+    newMenuB = editField("menu B", menuB)
+    newNodeB = editField("node B", nodeB)
+    
+    game[newNodeName] = [newDescription, newMenuA, newNodeA, newMenuB, newNodeB]
+    return game
 def editField(prompt, currentVal):
-    
-    
+    newVal = input(f"{prompt} ({currentVal}):")
+    if newVal == "":
+        newVal = currentVal
+    return newVal
+if __name__ == "__main__":
+    main()
     
     
     
